@@ -29,8 +29,9 @@
 <td>{{ $user->name }}</td>
 <td>{{ $user->email }}</td>
 <td>
-@if(!empty($user->getRoleNames()))
-@foreach($user->getRoleNames() as $v)
+
+@if(!empty($user->roles()->get()))
+@foreach($user->roles() as $v)
 <label class="badge badge-success">{{ $v }}</label>
 @endforeach
 @endif

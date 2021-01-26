@@ -22,15 +22,20 @@ Route::get('/', function () {
 Auth::routes();
    
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
    
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::get('/derickhome', 'App\Http\Controllers\DerickHomeController@index'); 
+    Route::get('/derickshow/{productName}', 'App\Http\Controllers\DerickHomeController@derickshow');
+
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/derickhome');
+    //return view('dashboard');
 })->name('dashboard');
 
 Auth::routes();
